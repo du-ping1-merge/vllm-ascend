@@ -65,7 +65,7 @@ fi
 # ---- torch-npu ----
 echo "Download, extract and install torch-npu..."
 mkdir -p /tmp/torch_npu
-wget --retry-connrefused --tries=5 --timeout=30 --waitretry=10 \
+wget -q --retry-connrefused --tries=5 --timeout=30 --waitretry=10 \
     -O /tmp/torch_npu/torch_npu.tar.gz \
     "https://pytorch-package.obs.cn-north-4.myhuaweicloud.com/pta/Daily/v2.10.0-${TORCH_NPU_VERSION}/${TORCH_NPU_DATE}/pytorch_v2.10.0-${TORCH_NPU_VERSION}_py312.tar.gz"
 tar -xzf /tmp/torch_npu/torch_npu.tar.gz -C /tmp/torch_npu
