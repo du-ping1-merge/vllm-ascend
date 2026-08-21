@@ -28,6 +28,7 @@ on:
         required: false
         type: choice
         options:
+          - v0.26_merge
           - main
           - v0.23.0rc1
           - v0.22.1rc1
@@ -40,6 +41,7 @@ on:
         required: false
         type: choice
         options:
+          - v0.26_merge
           - main
           - releases/v0.24.0rc
           - releases/v0.23.0
