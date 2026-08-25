@@ -116,7 +116,7 @@ on:
         description: 'CANN Quay URL'
         required: false
         type: string
-        default: 'swr.cn-north-4.myhuaweicloud.com/inference/cann'
+        default: 'swr.cn-north-12.myhuaweicloud.com/base_image/ascend-ci/cann'
       cann_version:
         description: 'CANN version'
         required: false
