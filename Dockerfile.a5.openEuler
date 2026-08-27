@@ -25,13 +25,15 @@ ARG PIP_INDEX_URL="https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple"
 WORKDIR /workspace
 
 SHELL ["/bin/bash", "-c"]
-# Note: Install CANN 950 Ops Transformer Package (ARM only)
+# Note: Install CANN 950 Ops Transformer Package
 ARG TARGETPLATFORM
 RUN ARCH=${TARGETPLATFORM:-$(uname -m)}; \
-    if [ "$ARCH" != "linux/arm64" ] && [ "$ARCH" != "aarch64" ]; then \
-        echo "Skipping ARM-only package" && exit 0; \
-    fi && \
-    CANN_OPS_TRANSFORMER_URL="https://ascend-ci.obs.cn-north-4.myhuaweicloud.com/package/open/20260820193947/cann-950-ops-transformer_9.2.0_linux-aarch64.run" && \
+    case "$ARCH" in \
+        "linux/arm64"|"aarch64") ARCH="aarch64" ;; \
+        "linux/amd64"|"x86_64") ARCH="x86_64" ;; \
+        *) echo "Skipping unsupported architecture: $ARCH" && exit 0 ;; \
+    esac && \
+    CANN_OPS_TRANSFORMER_URL="https://ascend-cann-open.obs.cn-north-4.myhuaweicloud.com/CANN/9.2.beta2/cann-950-ops-transformer_9.2.0-beta.2_linux-${ARCH}.run" && \
     wget --quiet ${CANN_OPS_TRANSFORMER_URL} -O /tmp/cann-950-ops-transformer.run && \
     chmod +x /tmp/cann-950-ops-transformer.run && \
     /tmp/cann-950-ops-transformer.run --full --quiet --install-for-all && \
